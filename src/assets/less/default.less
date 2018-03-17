@@ -31,6 +31,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     line-height: 1;
+    color: @color;
 }
 ol, ul {
     list-style: none;
@@ -43,6 +44,7 @@ q:before, q:after {
     content: '';
     content: none;
 }
+a{text-decoration: none;}
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -51,3 +53,13 @@ table {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
+.bg-color{
+    background-color: @bg-color;
+}
+.body-cons{
+    width: 1170px;margin: 0 auto;
+}
+
+// 开始引入 less
+
+@import "./index";
