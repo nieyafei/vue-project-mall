@@ -1,3 +1,5 @@
+@import '../assets/less/default'
+
 <template>
   <div class="layout-body">
       <div class="app-header">header</div>
