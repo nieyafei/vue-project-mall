@@ -2,12 +2,14 @@
   <div class="slider" @mouseover="clearAuto" @mouseout="runSlider">
       <ul class="slider-cont">
         <template v-for="(news,index) in sliderData">
+          <transition name="slide-banner" :key="'nihao0'+news.group_id">
             <li :key="news.group_id" :class="{'active': activeIndex===index}">
               <a :href="news.media_url">
-                  <h2>{{news.title}}</h2>
-                  <img :src="news.image_url" alt="">
+                  <h2 v-if="isShow" >{{news.title}}</h2>
+                  <img v-if="isShow" :src="news.image_url" alt="">
               </a>
             </li>
+          </transition>
         </template>
     </ul>
     <div class="slider-bot">
@@ -43,18 +45,26 @@ export default {
     return {
       message: '你好轮播',
       activeIndex: 1,
-      timeId: ''
+      timeId: '',
+      isShow: true
     }
   },
   methods: {
+    changeIndex (index) {
+      this.isShow = false
+      setTimeout(() => {
+        this.activeIndex = index
+        this.isShow = true
+      }, 10)
+    },
     mouserTab (index) {
       this.clearAuto()
-      this.activeIndex = index
+      this.changeIndex(index)
     },
     runSlider () {
       this.timeId = setInterval(() => {
-        this.activeIndex = this.getIndex
-      }, 2000)
+        this.changeIndex(this.getIndex)
+      }, 4000)
     },
     clearAuto () {
       clearInterval(this.timeId)
