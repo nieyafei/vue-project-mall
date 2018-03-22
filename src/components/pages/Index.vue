@@ -15,6 +15,8 @@
       <keep-alive>
         <Slider :sliderData="newsList"></Slider>
       </keep-alive>
+      <!-- 文章列表 -->
+
     </div>
     <div class="index-right">
 
