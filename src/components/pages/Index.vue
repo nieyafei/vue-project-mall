@@ -27,6 +27,7 @@
 import { productList } from '../../ComData/DataName'
 import Slider from './common/Slider'
 import NewsListTem from './common/NewsList'
+
 export default {
   components: {
     Slider, // 轮播组件
@@ -62,3 +63,5 @@ export default {
   }
 }
 </script>
+<style>
+</style>
