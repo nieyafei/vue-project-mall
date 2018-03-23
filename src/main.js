@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import strore from './store'
+import store from './store'
 
 require('./assets/less/default.less')
 
@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  strore,
+  store,
   components: { App },
   template: '<App/>'
 })

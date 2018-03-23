@@ -13,10 +13,10 @@
     <div class="index-middle">
       <!-- 轮播 -->
       <keep-alive>
-        <Slider :sliderData="newsList"></Slider>
+        <Slider :sliderData="sliderList"></Slider>
       </keep-alive>
       <!-- 文章列表 -->
-
+      <NewsListTem :newsList="newsList"></NewsListTem>
     </div>
     <div class="index-right">
 
@@ -24,30 +24,41 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
 import { productList } from '../../ComData/DataName'
 import Slider from './common/Slider'
+import NewsListTem from './common/NewsList'
 export default {
   components: {
-    Slider // 轮播组件
+    Slider, // 轮播组件
+    NewsListTem
   },
-  created () {
-    axios.get('/api/pc/focus/')
-      .then((response) => {
-        console.log(response.data.data.pc_feed_focus)
-        // 存储数据
-        this.newsList = response.data.data.pc_feed_focus
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
+  computed: {
+    sliderList () {
+      return this.$store.getters.getSliderList
+    },
+    newsList () {
+      return this.$store.getters.getNewsList
+    }
   },
   data () {
     return {
       productList, // 菜单
-      newsList: [], // 轮播 以及 24小时热点
       activeIndex: 1 // 当前选中菜单
     }
+  },
+  mounted () {
+    this.$store.dispatch('fetchList')
+    this.$store.commit('changeParams', {
+      category: '__all__',
+      utm_source: 'toutiao',
+      widen: 1,
+      tadrequire: true,
+      min_behot_time: Math.random((new Date().getTime()) / 1000),
+      as: '',
+      cp: '',
+      _signature: ''
+    })
+    this.$store.dispatch('loadNewsList')
   }
 }
 </script>
